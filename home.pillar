@@ -3,7 +3,7 @@
 "default": true, 
 "header": "Index"
 }
-! Ephemeric Cloud Documentation with LOVE
+! Ephemeric Cloud Documentation
 
 Ephemeric cloud is a platform for publishing web applications developed with Pharo. Platform provides a developer with REST API and Pharo Library to manage instances and publish new Pharo Images. 
 
