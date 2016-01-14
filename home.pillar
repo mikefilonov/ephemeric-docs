@@ -1,7 +1,7 @@
 {
 "reference": "home",
 "default": true, 
-"header": "Index"
+"header": "Documentation"
 }
 ! Ephemeric Cloud Documentation
 
@@ -18,9 +18,7 @@ Instructions for subscribing and configuring Ephemeric cloud account and publish
 Description of basic properties of Ephemeric instance and Image Archive file.
 
 !!!! *cloud_environment*
-Ephemeric cloud managed runtime allows you to map remote services like MongoDB to ephemeric instances which looks like the services run locally with the applications on the same host. It allows a developer not to put any configuration to the applciation code but to use default local settings as services will be mapped to the application at runtime.
-
-
+How to connect an ephemeric instance to remote services (like databases) using configurable cloud environment.
 
 
 !! References
@@ -34,7 +32,6 @@ Pharo library reference
 
 !! Use Cases
 - *usecase_do_mongo*
-- *usecase_managed_environment*
 - *usecase_teapot*
 - *usecase_dev_process*
 
