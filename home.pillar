@@ -1,0 +1,40 @@
+{
+"reference": "home",
+"default": true, 
+"header": "Index"
+}
+! Ephemeric Cloud Documentation
+
+Ephemeric cloud is a platform for publishing web applications developed with Pharo. Platform provides a developer with REST API and Pharo Library to manage instances and publish new Pharo Images. 
+
+Ephemeric cloud is readonly "Just In Time" cloud implementation which means that application VMs are running only when they are used allowing for managing big volume of published Images at a low datacenter costs.
+
+!! Tutorial
+
+!!!! *getting_started*
+Instructions for subscribing and configuring Ephemeric cloud account and publishing your first image to the cloud.
+
+!!!! *ephemeric_instance*
+Description of basic properties of Ephemeric instance and Image Archive file.
+
+!!!! *cloud_environment*
+Ephemeric cloud managed runtime allows you to map remote services like MongoDB to ephemeric instances which looks like the services run locally with the applications on the same host. It allows a developer not to put any configuration to the applciation code but to use default local settings as services will be mapped to the application at runtime.
+
+
+
+
+!! References
+
+!!!! *rest_api*
+REST API reference
+
+!!!! *pharo_library_reference*
+Pharo library reference
+
+
+!! Use Cases
+- *usecase_do_mongo*
+- *usecase_managed_environment*
+- *usecase_teapot*
+- *usecase_dev_process*
+

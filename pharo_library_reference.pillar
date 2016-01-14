@@ -1,0 +1,36 @@
+@pharo_library_reference
+
+! Pharo Library Reference
+
+!! Installation
+
+[[[
+Metacello new 
+    baseline: #EphemericCloudAPI; 
+    repository: 'github://mikefilonov/PharoEphemericCloudApi';
+    load.
+]]]
+
+!!! Repository
+*https://github.com/mikefilonov/PharoEphemericCloudApi*
+
+!! Overview
+
+!! Index
+Classes
+- *EphemericCloudClient>@EphemericCloudClient*
+-- ==authID:authToken:==, ==all==, ==/==, ==publishZip:named:==
+- *EphemericInstance>@EphemericInstance*
+-- ==reload==, ==delete==, ==alias==,  ==alias:==, ==imageName==
+
+!!Classes
+@EphemericCloudClient
+!!!EphemericCloudClient
+!!!!Class Methods
+- 
+
+
+!!!!Instance Methods
+- 
+
+

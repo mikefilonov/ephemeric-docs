@@ -1,0 +1,41 @@
+@usecase_teapot
+
+! [Use Case] How to publish a Teapot application in Ephemeric Cloud
+
+To publish a Pharo Image in Ephemeric cloud you need to make it ""autostart"" on ==8080== port. It is not a problem for Seaside applications as ==ZnZincServerAdaptor== takes care of restarting the server, however it is not included in Teapot framework. If you just register a Teapot application and save it you will not see it running when you restart the Image. Thus you will not be able to publish it in Ephemeric Cloud as the published Image will not respond on ==8080== port. 
+
+In this article I suggest to try an approach that adds an autostart to Teapot application Images.
+
+!! Smalltalk start-up list
+
+Pharo provides quite a convinient way to run script on start of your Image by provinding a start-up list functionallity. You can add your own scripts to the list using a 'startup list' protocol included in ==SmalltalkImage== (accessible via ==Smalltalk== global variable).
+
+To add a new entry to the list you should create a new class in the Image and implement a ==startUp== mehtod on the class side. The method should contain the desired initalization script to be run at every start of an Image. To add the class to a startup list execute the following code and then ""save the Image"":
+
+[[[
+Smalltalk addToStartUpList: MyClass.
+]]]
+
+!! Teapot initialization on Image startup
+
+To make Teapot run on Image restart just add the initalization code of Teapot application to the ==startUp== class method of class added to Smalltalk startup list. For instance the following code initalize simple counter application:
+[[[
+CounterApplication class>>startUp
+    |counter teapot|
+
+    counter := 0.
+
+    teapot := Teapot stopAll; configure: { #port -> 8080 }.
+
+    teapot
+        serveStatic: '/' from: './static/';
+        GET: '/counter' -> [:req | counter ];
+        GET: '/inccounter' -> [:req |counter := counter + 1];
+        GET: '/deccounter' -> [:req |counter := counter - 1];
+        start.
+]]]
+
+You may download the Image with Teapot autostarting here: *http://imagetransport.pharocloud.com/imagestore/TeapotCounter.zip*
+
+To test the Image in Ephemeric cloud just drag&drop the archive to the Ephemeric cloud manager site.
+

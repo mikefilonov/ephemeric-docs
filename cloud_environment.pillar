@@ -1,0 +1,8 @@
+@cloud_environment
+
+! Configurable Cloud Environment
+
+This becomes possible due to Ephemeric cloud configurable runtime environment – this method allows remote encrypted services to be seen as local open applications. The idea is that the environment configuration should not be done in a code but must be provided by the infrastructure.
+
+With the following article I will describe how to configure the Ephemeric runtime to map remote resources.
+

@@ -1,0 +1,28 @@
+@getting_started
+
+!!Getting Started
+
+Ephemeric cloud is a cloud platform for hosting Pharo web applications. The main feature of Ephemeric cloud is REST API which allows you to script an application start in the cloud (for instance, with ==curl== command line utility or using Pharo library).
+
+
+!!! Access to the Cloud
+
+Ephemeric cloud is free to configure for anybody with a Pharocloud account. To get one sign up at *Pharocloud registration page>https://www.pharocloud.com/account/signup*.
+If you have one just *log in>https://www.pharocloud.com/account/login* to Pharocloud with your usual credentials. To activate an Ephemeric cloud open "Ephemeric" tab and click "Activate". Then the page will create and show your Ephemeric User ID and Auth token. You can use those to work with ephemeric REST API or login to "Ephemeric Cloud Client".
+
++file:///figures/getting_started_1.png|width=50+
+
+Free tier of Ephemeric Cloud account is limited to 1 active instance by default. This means the limitation is set not by number of instance you create but by the number of activly running instances. You can lift the limitation by changing the Ephemeric Cloud subscription plan.
+
+
+!!! Quick start video tutorials
+
+To quick dive in watch the following short video tutorials.
+
+- *Ephemeric cloud account activation>http://www.youtube.com/watch?v=YSsoij0xjUY*
+- *How to publish Seaside Image Archive>http://www.youtube.com/watch?v=a1GfuT9M4qo* 
+
+If want to test Ephemeric Cloud you may just want to download and use a test Image Archive File with a sample Seaside application:
+-*Seaside Image Archive Sample File>http://imagetransport.pharocloud.com/imagestore/EphSeaside.zip*
+
+!!! Default Cloud Client

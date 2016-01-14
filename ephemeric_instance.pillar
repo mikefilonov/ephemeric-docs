@@ -1,0 +1,77 @@
+@ephemeric_instance
+
+! Ephemeric Instances
+
+Ephemeric cloud is designed to efficiently host lots of applications. There are some restrictions applied to the hosted Images though.
+
+- First, an Ephemeric application is "paused" after 30 minutes of inactivity. It means that the Pharo Image is stopped and all the associated resources are removed from the memory. Ephemeric Cloud is designed specially for web solutions hence by "inactivity" it is meant no HTTP requests sent to the Ephemeric. The system automatically starts the Epehemric application upon the next request so for the user it looks like it was never off.
+- Second, an Epehemric application is read-only. By this it is meant your Image is not able to write data to a local disk. For instance, you are not able to use Image Persistence or other type of File Persistence for your application. The idea is that published Images are immutable and can be identified by it's content. However the restriction works only for a local disk so your Ephemeric may save data to any remote locations like MongoDB applicance for data, WebDAV appliance for files or other services you prefer.
+- Third, an Ephemeric application must be quit-tolerant. As the system stops and starts Images depending on users activity the Image looses it's state on each start/sleep cycle. This means your application must be disigned appropriately and does not store important information in memory.
+
+
+!!! Image Archive File
+
+To create a new instance in Ephemeric Cloud user sends an HTTP request with an ==Image Archive File== which contains a application to run. Image Archive File is ==tar== or ==zip== archive with one Pharo image and complimenting files (sources, changes, file resources). System unarchives the file, searches for an .image file and run it with the following command line:
+
+[[[
+pharo -vm-display-null --headless --encoding UTF-8 "$IMAGE" --no-quit
+]]]
+
+There are some restrictions applied on Image Archive file:
+- Image Archive File size limit is set to ==50Mb==.
+- Image must automatically start a web server on ==:8080== port.
+
+Image Archive file may contain some additional configuration files which have some special processing:
+- Startup script (==startup.st==)
+- Environment configuration (==stunnel.conf==)
+
+!!!! Startup script
+If you want for some script executed upon Image start you may put ==startup.st== file in Image Archive File in the same location as Pharo Image. This file may contain any smalltalk code like startup of services, and configuring database connections.
+
+This file is very helpful to get Pharo Teapot applications run in Ephemeric cloud as Teapot is not auto-restarting on Image restart.
+
+!!!! Environment configuration
+Ephemeric cloud provides an automation of enviroment configuration by using secure tunnels to external resources like databases. If system finds a ==stunnel.conf== file in Image Archive File it will automatically apply this configuration to instatance. Read more in *cloud_environment*
+
+!! Instance object
+
+!!! Sample Ephemeric JSON
+[[[
+{
+      "accessTime": "2016-01-12T15:19:20.204+00:00",
+      "createdTime": "2016-01-02T04:39:52.395+00:00",
+      "alias": "example.swarm.pharocloud.com",
+      "isRunning": false,
+      "imageName": "Ephemeric-Cloud-Client-1.3.zip",
+      "hostname": "eph-865894e7.swarm.pharocloud.com"
+}
+]]]
+
+!!! Properties
+!!!! hostname
+Random-generated hostname automatically assigned to an instance on publish. Used as unique identifier of an instance in the cloud. Read-only property.
+
+Ex.: == "eph-865894e7.swarm.pharocloud.com"==
+
+!!!! createdTime
+Date and time of initial instance creation. Read-only property.
+
+Ex.: =="2016-01-12T15:19:20.204+00:00"==
+
+!!!! isRunning
+Boolean, ==true== if instance is actively running right now. Writable option. To activate instance you can change the value to ==true==.
+
+!!!! alias
+Additional hostname which can be assigned to an instance by a user. If set to a value assigned to another instance owned by the user then previous instance's alias is set to ==null== value. Writable string property.
+
+@@Note Proper way to re-map alias is to set a value to a new instance first and then stop previous instance by setting ==isRunning== property to ==false==.
+
+@@Note User may use any hostname you want if it is pointing to ephemeric gate domain. You also may use any ==*.swarm.pharocloud.com== domain for not to configure anything, just make sure alias is not claimed yet.
+
+!!!! accessTime
+Last time instance was activated. Read-only date string property.
+
+!!!! imageName
+A descriptive name of the instance set by a user. Writable string property.
+
+
