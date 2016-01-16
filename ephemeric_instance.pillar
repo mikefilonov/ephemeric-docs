@@ -49,29 +49,41 @@ Ephemeric cloud provides an automation of enviroment configuration by using secu
 
 !!! Properties
 !!!! hostname
+{{{html:<blockquote>}}}
 Random-generated hostname automatically assigned to an instance on publish. Used as unique identifier of an instance in the cloud. Read-only property.
 
 Ex.: == "eph-865894e7.swarm.pharocloud.com"==
+{{{html:</blockquote>}}}
 
 !!!! createdTime
+{{{html:<blockquote>}}}
 Date and time of initial instance creation. Read-only property.
 
 Ex.: =="2016-01-12T15:19:20.204+00:00"==
+{{{html:</blockquote>}}}
 
 !!!! isRunning
+{{{html:<blockquote>}}}
 Boolean, ==true== if instance is actively running right now. Writable option. To activate instance you can change the value to ==true==.
+{{{html:</blockquote>}}}
+
 
 !!!! alias
+{{{html:<blockquote>}}}
 Additional hostname which can be assigned to an instance by a user. If set to a value assigned to another instance owned by the user then previous instance's alias is set to ==null== value. Writable string property.
 
 @@Note Proper way to re-map alias is to set a value to a new instance first and then stop previous instance by setting ==isRunning== property to ==false==.
 
 @@Note User may use any hostname you want if it is pointing to ephemeric gate domain. You also may use any ==*.swarm.pharocloud.com== domain for not to configure anything, just make sure alias is not claimed yet.
+{{{html:</blockquote>}}}
 
 !!!! accessTime
+{{{html:<blockquote>}}}
 Last time instance was activated. Read-only date string property.
+{{{html:</blockquote>}}}
 
 !!!! imageName
+{{{html:<blockquote>}}}
 A descriptive name of the instance set by a user. Writable string property.
-
+{{{html:</blockquote>}}}
 

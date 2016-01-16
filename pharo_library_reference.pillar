@@ -20,15 +20,15 @@ Metacello new
 - *EphemericCloudClient>@EphemericCloudClient*
 -- ''==*userID:authToken>@userID:authToken:*=='', ==*test>@test*== ==*all>@all*==, ==*/>@/*==, ==*publishZip:named:>@publishZip:named:*==, ==*publishSelfAs:with:>@publishSelfAs:with:*==
 - *EphemericInstance>@EphemericInstance*
--- ==hostname==, ==alias==,  ==alias:==, ==reload==, ==delete==, ==imageName==,==imageName:==, ==isRunning==, ==isRunning:==, ==accessTime==, ==createdTime==
+-- ==*hostname>@hostname*==, ==*alias>@alias*==,  ==*alias:>@alias:*==, ==*reload>@reload*==, ==*delete>@delete*==, ==*imageName>@imageName*==,==*imageName:>@imageName:*==, ==*isRunning>@isRunning*==, ==*isRunning:>@isRunning*==, ==*accessTime>@accessTime*==, ==*createdTime>@createdTime*==
 
 !!Classes
 @EphemericCloudClient
 !!! EphemericCloudClient
-!!! Class Methods
 
 @userID:authToken:
-!!!! ==userID: userID authToken: authToken==
+!!!! userID:authToken: ''(class method)''
+{{{html:<blockquote>}}}
 Create an instance of EphemericCloudClient, authenticate with ==userID== and ==authToken==
 
 [[[
@@ -36,23 +36,29 @@ client := EphemericCloudClient
                   userID: 'ervak6b175f99echf6jasy8vm'
                   authToken: ''.
 ]]]
+{{{html:</blockquote>}}}
 
-!!! Instance Methods
+
 @test
-!!!! ==test==
+!!!! test
+{{{html:<blockquote>}}}
 Check if client is connected and authenticated.
+{{{html:</blockquote>}}}
+
 
 @all
-!!!! ==all==
+!!!! all
+{{{html:<blockquote>}}}
 Answer an array of EphemericInstances for current client.
 
 [[[
 client all.
 "an Array(EphemericInstance(eph-865894e7.swarm.pharocloud.com,Ephemeric-Cloud-Client-1.3.zip))"
 ]]]
-
+{{{html:</blockquote>}}}
 @/
-!!!! ==/ aString==
+!!!! / hostname
+{{{html:<blockquote>}}}
 Answer an EphemericInstance with a hostname or alias equals to ==aString==
 
 Example:
@@ -60,20 +66,27 @@ Example:
 client / 'docs.swarm.pharocloud.com'. 
 "EphemericInstance(eph-a33f8ffe.swarm.pharocloud.com,Ephemeric Documentation)"
 ]]]
+{{{html:</blockquote>}}}
 
 @publishZip:named:
-!!!! ==publishZip: aFileReference named: imageNameString==
+!!!! publishZip: aFileReference named: imageNameString
+{{{html:<blockquote>}}}
 Publish Zip Image Archive file in Ephemeric Cloud. Answer created EphemericInstance object.
+{{{html:</blockquote>}}}
+
+
+
 
 @publishSelfAs:with:
-!!!! ==publishSelfAs: imageName with: achiveBlock==
+!!!! publishSelfAs: imageName with: achiveBlock
+{{{html:<blockquote>}}}
 
 Backup current Image and publish it in Ephemeric Cloud. ==archiveBlock== is one argument block which accepts a archive been created to allow adding more files except for ==.image== and ==.changes==.
 
 Answers ==false== in original Image, ==true== in Image copy which is to be published in the Cloud.
 
 Example:
-[[[smalltalk
+[[[language=smalltalk
 isNew := client publishSelfAs: 'releaseImage' with: [ :archive |
     "add more files"  
     archive addFile: 'startup.st' ].
@@ -84,3 +97,80 @@ isNew
     ifFasle: [
         "code to execute in original Image" ] 
 ]]]
+{{{html:</blockquote>}}}
+
+@EphemericInstance
+!!! EphemericInstance
+
+
+@hostname
+!!!!hostname
+{{{html:<blockquote>}}}
+Answer hostname (string) of an ephemeric instance.
+{{{html:</blockquote>}}}
+
+@alias
+!!!!alias
+{{{html:<blockquote>}}}
+Answer alias hostname (string) of an ephemeric instance.
+{{{html:</blockquote>}}}
+
+
+@alias:
+!!!!alias:
+{{{html:<blockquote>}}}
+Set or change alias hostname for the instance. ==nil== to remove alias from the instance.
+{{{html:</blockquote>}}}
+
+@reload
+!!!!reload
+{{{html:<blockquote>}}}
+Reread information on the instance from the API server.
+{{{html:</blockquote>}}}
+
+@delete
+!!!!delete
+{{{html:<blockquote>}}}
+Delete ephemeric instance from the cloud.
+{{{html:</blockquote>}}}
+
+
+@imageName
+!!!!imageName
+{{{html:<blockquote>}}}
+Answer ==imageName== of the instance.
+{{{html:</blockquote>}}}
+
+
+@imageName:
+!!!!imageName:
+{{{html:<blockquote>}}}
+Change ==imageName== property of the ephemeric instance.
+{{{html:</blockquote>}}}
+
+@isRunning
+!!!!isRunning
+{{{html:<blockquote>}}}
+Answer whether the instance is currently active.
+{{{html:</blockquote>}}}
+
+@isRunning:
+!!!!isRunning:
+{{{html:<blockquote>}}}
+Used to force-stop or force-activate the instance. To stop the instance set the value to ==false==.
+{{{html:</blockquote>}}}
+
+
+@accessTime
+!!!!accessTime
+{{{html:<blockquote>}}}
+Answer DateAndTime  string of last access time of the instance.
+{{{html:</blockquote>}}}
+
+
+
+@createdTime
+!!!!createdTime
+{{{html:<blockquote>}}}
+Answer DateAndTime string of instance creation.
+{{{html:</blockquote>}}}

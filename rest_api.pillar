@@ -4,36 +4,44 @@
 
 Ephemeric cloud REST API is a collection of HTTP requests designed to manage your cloud. Requests work with ==JSON== format to respond your calls.
 
+The REST API objects are:
+- a user,
+- a collection of ephemerics owned by a user,
+- a property of ephemeric.
 
-A user cloud is accessible by REST API at the following API endpoint:
-
-= https://www.pharocloud.com/api/ephemerics/user/<userID>?auth=<authToken>
-
-Each request must have ==authToken== query parameter associated with the user to perform a query.
-
-
-The REST API represents a user as a collection of ephemerics. Ephemeric instances are identified by the hostname (eg.: ==eph-312de9eb.swarm.pharocloud.com==). You can get your ==userID== in Pharocloud Ephemerics account settings.
-
-The list of REST API calls is as follows:
-- ==GET /api/ephemerics/user/<userID>== gets information about all Ephemerics owned by a userID.
-- ==GET /api/ephemerics/user/<userID>/<ephemericHost>== gets information about an Ephemeric application which associated with "ephemericHost".
-- ==POST /api/ephemerics/user/<userID>== creates a new Ephemeric application using Image Archive File which is attached to the query (file field property "imageZip").
-- ==DELETE /api/ephemerics/user/<userID>/<ephemericHost>== removes Ephemeric with host "ephemericHost" from the cloud.
-- ==GET /api/ephemerics/user/<userID>/<ephemericHost>/stop==  Force pause of the ephemeric instance. Please note that gate cache will not be cleared with force pause which may lead up to 30 secons delay of a start.
+Objects are grouped in a tree like structure: ==<user>/<ephemeric>/<property>==.
+User object is identified by ==userID== which is given to your account after a registration process. Ephemeric instance is identified by a hostname (eg.: ==eph-312de9eb.swarm.pharocloud.com==).
 
 
-!! 4 Using CURL to manage Epehemric Cloud
+!! API end-point
 
-Get the list of ephemerics owned by a user ==elghg175f959echf6jasy8vm==:
+The following endpoint is used to access root object of a user:
 [[[
-curl -X GET "https://www.pharocloud.com/api/ephemerics/user/elghg175f959echf6jasy8vm/?auth=TFGJZJ47fJs9c9GfgtGZGI3n"
-
-{"ephemerics":[{"isRunning":false,"hostname":"eph-865894e7.swarm.pharocloud.com","name":"Ephemeric-Cloud-Client-1.3.zip"],"used":0,"limit":20}
+https://www.pharocloud.com/api/ephemerics/user/<userID>
 ]]]
 
-@@Note Ephemeric instances are identified by a hostname. In the example above the user has one ephemeric named ==eph-865894e7.swarm.pharocloud.com==.
+!! Authentification
+Authentification can be done by basic HTTP authentification header or by adding ==auth== query parameter to an request URL.
+Ex:
+[[[
+https://www.pharocloud.com/api/ephemerics/user/<userID>?auth=<authToken>
+]]]
 
-Create a new Ephemeric:
+
+!! Methods
+
+The list of REST API calls is as follows:
+- ==POST /api/ephemerics/user/<userID>== creates a new Ephemeric application using Image Archive File which is attached to the query (file field property "imageZip").
+- ==GET /api/ephemerics/user/<userID>== gets information about all Ephemerics owned by a userID.
+- ==GET /api/ephemerics/user/<userID>/<ephemericHost>== gets information about an Ephemeric application which associated with "ephemericHost".
+- ==DELETE /api/ephemerics/user/<userID>/<ephemericHost>== delete Ephemeric with host "ephemericHost" from the cloud.
+- ==PUT /api/ephemerics/user/<userID>/<ephemericHost>/isRunning== change the running state of the ephemeric. Accepts "true" or "false" values.
+- ==PUT /api/ephemerics/user/<userID>/<ephemericHost>/alias== change alias value of the instance.
+- ==PUT /api/ephemerics/user/<userID>/<ephemericHost>/imageName== change image name description of the ephemeric.
+
+!! Examples
+
+!!! How to create ephemeric with CURL
 
 [[[
 curl -X POST -F 'imageZip=@ephemericArchive.zip' https://www.pharocloud.com/api/ephemerics/user/elghg175f959echf6jasy8vm/?auth=TFGJZJ47fJs9c9GfgtGZGI3n
@@ -42,13 +50,4 @@ curl -X POST -F 'imageZip=@ephemericArchive.zip' https://www.pharocloud.com/api/
 ]]]
 
 
-
-To delete an an Ephemeric instance send DELETE request to an ephemeric node (identified by hostname answered by the create command):
-
-
-[[[
-curl -X DELETE https://www.pharocloud.com/api/ephemerics/user/elghg175f959echf6jasy8vm/eph-9dcba441.swarm.pharocloud.com?auth=TFGJZJ47fJs9c9GfgtGZGI3n
-]]]
-
-
-- Video Sceencast: *Ephemeric cloud: publishing StoryBoard application with CURL>http://www.youtube.com/watch?v=9dKBCpj96cU*
+Video Sceencast: *Ephemeric cloud: publishing StoryBoard application with CURL>http://www.youtube.com/watch?v=9dKBCpj96cU*
