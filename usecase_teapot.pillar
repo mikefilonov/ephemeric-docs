@@ -2,23 +2,59 @@
 
 ! [Use Case] How to publish a Teapot application in Ephemeric Cloud
 
-To publish a Pharo Image in Ephemeric cloud you need to make it ""autostart"" on ==8080== port. It is not a problem for Seaside applications as ==ZnZincServerAdaptor== takes care of restarting the server, however it is not included in Teapot framework. If you just register a Teapot application and save it you will not see it running when you restart the Image. Thus you will not be able to publish it in Ephemeric Cloud as the published Image will not respond on ==8080== port. 
+To publish a Pharo Image in Ephemeric cloud you need to make it ""autostart"" on ==8080== port. It is not a problem for Seaside applications as ==ZnZincServerAdaptor== takes care of restarting the server on VM restart, however, this function is not included in Teapot framework. If you just register a Teapot application and save your Image the application will not be running when you restart the Image. Thus you will not be able to publish it in Ephemeric Cloud as the published Image will not respond on ==8080== port. 
 
-In this article I suggest to try an approach that adds an autostart to Teapot application Images.
+In this article I suggest to try approaches that makes possible to publish teapot applications in Ephemeric Cloud
 
-!! Smalltalk start-up list
+!!1 Startup file
+The straightforward solution is to add a ==startup.st== file to Image Archive File before publishing your application to the Ephemeric cloud. This file is by pharo-vm each time Image is loaded in memory of Ephemeric cloud.
 
-Pharo provides quite a convinient way to run script on start of your Image by provinding a start-up list functionallity. You can add your own scripts to the list using a 'startup list' protocol included in ==SmalltalkImage== (accessible via ==Smalltalk== global variable).
+You can read more on Image starup file in *ephemeric_instance@image_archive_file* article. 
 
-To add a new entry to the list you should create a new class in the Image and implement a ==startUp== mehtod on the class side. The method should contain the desired initalization script to be run at every start of an Image. To add the class to a startup list execute the following code and then ""save the Image"":
+==startup.st==
+[[[
+    teapot := Teapot stopAll; configure: { #port -> 8080 }.
+    teapot
+        serveStatic: '/' from: './static/';
+        "put more teapot commands here"
+        start.
+]]]
+
+!!2 Publishing with Pharo EphemericAPI library
+If you are implementing publishing of Image using *Pharo EphemericAPI library>pharo_library_reference* then you can use a trick to initialize your Image in the cloud.
+
+The method of EphemericApiClient ==publishMeAs:with:== makes a copy of the current Image and publishes it in the Cloud. As it is a full copy of the Image it means two Images (copy and original) are saved in the state of executing code. This means that when the published version is run in the cloud it will continue current instruction flow from the point of backup.
+
+To be able to run different code in original image and in the copy the ==publishMeAs:with:== method answers a boolean value which is ==true== for the copy and ==false== for the original image.
+
+Therefore you may push some startup instructions easily on your published image. The following is a snippet of publishing code of the PillarBook application:
+
+[[[
+isNew := client publishSelfAs: imageName.
+isNew 
+	ifTrue: [ "We are in ephemeric cloud, initialize environment"
+		WAAdmin clearAll.
+		WAAdmin disableDevelopmentTools.
+		PBViewApplication registerAt: self defaultBaseUrl.
+		PBArticle exportDirectory: nil. "work directory as default"
+		WAAdmin defaultDispatcher defaultName: self defaultBaseUrl.
+		WAAdmin register: WAFileHandler at: 'files'. "standard libraries"
+		^nil ];
+	ifFalse: [ "Original image"
+		^client lastPublishedInstance ]
+]]]
+
+!!3 Smalltalk start-up list
+
+Pharo provides quite a convenient way to run script on start of your Image by adding  start-up scripts inside Image itself. 'Startup list' protocol included of ==SmalltalkImage== (accessible via ==Smalltalk== global variable) is used for that purpose.
+
+To add a new entry to the list create a new class in the Image and implement a ==startUp== method on the class side. The method will be run at every start of an Image. To add the class to a startup list execute the following code and then ""save the Image"":
 
 [[[
 Smalltalk addToStartUpList: MyClass.
 ]]]
 
-!! Teapot initialization on Image startup
-
-To make Teapot run on Image restart just add the initalization code of Teapot application to the ==startUp== class method of class added to Smalltalk startup list. For instance the following code initalize simple counter application:
+To make Teapot run on Image restart just add the initialization code of Teapot application to the ==startUp== class method of class added to Smalltalk startup list. For instance the following code initialize simple counter application:
 [[[
 CounterApplication class>>startUp
     |counter teapot|
@@ -35,7 +71,7 @@ CounterApplication class>>startUp
         start.
 ]]]
 
-You may download the Image with Teapot autostarting here: *http://imagetransport.pharocloud.com/imagestore/TeapotCounter.zip*
+You may download the Image with Teapot auto-starting here: *http://imagetransport.pharocloud.com/imagestore/TeapotCounter.zip*
 
 To test the Image in Ephemeric cloud just drag&drop the archive to the Ephemeric cloud manager site.
 

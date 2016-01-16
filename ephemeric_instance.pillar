@@ -8,7 +8,7 @@ Ephemeric cloud is designed to efficiently host lots of applications. There are 
 - Second, an Epehemric application is read-only. By this it is meant your Image is not able to write data to a local disk. For instance, you are not able to use Image Persistence or other type of File Persistence for your application. The idea is that published Images are immutable and can be identified by it's content. However the restriction works only for a local disk so your Ephemeric may save data to any remote locations like MongoDB applicance for data, WebDAV appliance for files or other services you prefer.
 - Third, an Ephemeric application must be quit-tolerant. As the system stops and starts Images depending on users activity the Image looses it's state on each start/sleep cycle. This means your application must be disigned appropriately and does not store important information in memory.
 
-
+@image_archive_file
 !!! Image Archive File
 
 To create a new instance in Ephemeric Cloud user sends an HTTP request with an ==Image Archive File== which contains a application to run. Image Archive File is ==tar== or ==zip== archive with one Pharo image and complimenting files (sources, changes, file resources). System unarchives the file, searches for an .image file and run it with the following command line:
