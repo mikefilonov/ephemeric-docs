@@ -17,20 +17,70 @@ Metacello new
 !! Overview
 
 !! Index
-Classes
 - *EphemericCloudClient>@EphemericCloudClient*
--- ==authID:authToken:==, ==all==, ==/==, ==publishZip:named:==
+-- ''==*userID:authToken>@userID:authToken:*=='', ==*test>@test*== ==*all>@all*==, ==*/>@/*==, ==*publishZip:named:>@publishZip:named:*==, ==*publishSelfAs:with:>@publishSelfAs:with:*==
 - *EphemericInstance>@EphemericInstance*
--- ==reload==, ==delete==, ==alias==,  ==alias:==, ==imageName==
+-- ==hostname==, ==alias==,  ==alias:==, ==reload==, ==delete==, ==imageName==,==imageName:==, ==isRunning==, ==isRunning:==, ==accessTime==, ==createdTime==
 
 !!Classes
 @EphemericCloudClient
-!!!EphemericCloudClient
-!!!!Class Methods
-- 
+!!! EphemericCloudClient
+!!! Class Methods
 
+@userID:authToken:
+!!!! ==userID: userID authToken: authToken==
+Create an instance of EphemericCloudClient, authenticate with ==userID== and ==authToken==
 
-!!!!Instance Methods
-- 
+[[[
+client := EphemericCloudClient 
+                  userID: 'ervak6b175f99echf6jasy8vm'
+                  authToken: ''.
+]]]
 
+!!! Instance Methods
+@test
+!!!! ==test==
+Check if client is connected and authenticated.
 
+@all
+!!!! ==all==
+Answer an array of EphemericInstances for current client.
+
+[[[
+client all.
+"an Array(EphemericInstance(eph-865894e7.swarm.pharocloud.com,Ephemeric-Cloud-Client-1.3.zip))"
+]]]
+
+@/
+!!!! ==/ aString==
+Answer an EphemericInstance with a hostname or alias equals to ==aString==
+
+Example:
+[[[
+client / 'docs.swarm.pharocloud.com'. 
+"EphemericInstance(eph-a33f8ffe.swarm.pharocloud.com,Ephemeric Documentation)"
+]]]
+
+@publishZip:named:
+!!!! ==publishZip: aFileReference named: imageNameString==
+Publish Zip Image Archive file in Ephemeric Cloud. Answer created EphemericInstance object.
+
+@publishSelfAs:with:
+!!!! ==publishSelfAs: imageName with: achiveBlock==
+
+Backup current Image and publish it in Ephemeric Cloud. ==archiveBlock== is one argument block which accepts a archive been created to allow adding more files except for ==.image== and ==.changes==.
+
+Answers ==false== in original Image, ==true== in Image copy which is to be published in the Cloud.
+
+Example:
+[[[smalltalk
+isNew := client publishSelfAs: 'releaseImage' with: [ :archive |
+    "add more files"  
+    archive addFile: 'startup.st' ].
+
+isNew 
+    ifTrue: [ 
+        "code to execute in Ephemeric Cloud Image copy" ] 
+    ifFasle: [
+        "code to execute in original Image" ] 
+]]]
