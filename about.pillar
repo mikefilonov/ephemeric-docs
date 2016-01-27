@@ -1,0 +1,35 @@
+@about
+
+! Introduction
+
+There are plenty ways to deploy Smalltalk application online: Amazon cloud, Digital Ocean virtual machines, dedicated servers and more (some guys even use Pharocloud appliances with quite a success:))
+The deployment process for Smalltalk applications with such approaches is basically equal to the deployment process for any other applications: in most cases you must configure your Linux virtual machine to launch executable with specified settings.
+
+We believe that Smalltalk deserves more. After all the standard approach of applications deployment absolutely ignores Smalltalk features and makes this process far more complicated than it should be.
+
+Just think: Smalltalk image contains not only the application code but the whole environment starting from system level functions up to web server. This means to deploy the application it should be sufficient to only provide the Smalltalk image itself and no matter which environment it launches, right? Hmm.. Then why are there any additional configuration steps required to publish Smalltalk application?
+
+Ok, we gave the idea of perfect hosting for Smalltalk applications a try and here is what we got – Ephemeric cloud.
+
+Ephemeric cloud primary concept is Smalltalk image as the main system unit. Developer works not with virtual machines but with Smalltalk images deployed in the cloud. Hence to launch a new application only the image is required to be uploaded to the cloud – let the system cares about all the other stuff.
+
+Basically Ephemeric cloud is a developer’s publishing tool for Smalltalk applications. However the cloud might work both as a platform for ready application and as a part of development and testing process.
+
+Moreover there is another system feature – it works through application programming interface: a standard HTTP REST API or a special library Pharo Ephemeric Cloud API. This allows to integrate the Ephemeric cloud with any part of your application and/or script. For instance, developer can add a button “RUN” to a web-site of his application and automatically publish a copy of his application on the cloud to his client. Ephemeric cloud can also be used as another step of continuous integration in auto-build and test systems or as a public server for build artifacts outputs. All told, due to the cloud application programming interface there are quite a few options to use it.
+
+As for technical point of view Ephemeric cloud is developed according to so-known “Just in time cloud” concept. It means that the applications running in the cloud are stopped after some non-active time and respectively require no resources. On the next access attempt the application launches again, thus it looks like the application works permanently. Sounds great, right? Though such a concept has some restrictions on the applications to be run in the cloud.
+
+First, the applications must be quit-tolerant which means the application should handle well sudden shutdown after some downtime and run appropriately after restart.
+
+Second, to ensure images stable start and restart in the system, we made published images to be read-only in the cloud. This means it is impossible to “save” your image in the cloud and thus use Image persistence for your data. Theoretically, Image “update” is only possible in a way of publishing of a new image with amended data and removal of a previous image (see also “contentable addressed storage” for more information on why it is done this way). However, it does not mean it is impossible to connect to any external systems available for data persistence, such as external databases and/or network drive: you are able to connect to any service provider using a configurable secure channel even through public networks.
+
+Finally, the cloud is created for web-applications hosting and micro-services first, thus “activity” in our understanding means incoming http-requests. This being said, the cloud expects enabled web-server inside the image on 8080 port.
+Generally such restrictions should not be a problem for majority of web-applications.
+
+As for the payment question, we are happy to introduce you another feature. While operating with Ephemeric cloud, our users do not pay for every single image published as it is in case of virtual machines. Ephemeric cloud works on flat monthly fee base. It is possible to choose between different cloud access levels with respective payment. Access levels differ by the number of resources available, i.e. maximum number of simultaneously active Images. Within the chosen access level, the user can start, stop, and change the images published without any restrictions.
+
+And here comes our icing on the cake! Currently our cloud works in beta-version mode, thus we are willing to give the access to everyone who cares absolutely for free. Thereby, if you also support the idea of perfect Smalltalk hosting, you’re very welcome!
+
+As always, please contact me at support@pharocloud.com in case of any questions.
+
+Cheers!
