@@ -4,19 +4,19 @@
 
 It is possible to connect Ephemeric cloud instance to external services like databases. If the cloud runtime finds a special file named ==stunnel.conf== in a published Image Archive File then it creates a secure tunnel to specified services.
 
-Configuration file ==stunnel.conf== is a plain text file which consist of description of tunnels. Each description usually contains a connection information to remote service and authentification method (like "pre-shared keys" or "certificates").
+Configuration file ==stunnel.conf== is a plain text file which consists of description of tunnels. Each description usually contains connection information to remote service and authentification method (like "pre-shared keys" or "certificates").
 
-Configuration file may contain several destination and system will open all connections for you.
+Configuration file may contain several destination. The system will open all connections for you then.
 
-The tunnels are secured by encription and therefore you may connect to your servies acros public network. However, all encription job is done by the system so from ephemeric instance point of view it would seems like working with open, un-enctypted ports.
+The tunnels are secured by encription and hence you may connect to your services across public network. However, all encription job is done by the system so from ephemeric instance point of view it would seem like working with open, un-enctypted ports.
 
-System uses utilty called ==stunnel== which is available for the most of the platforms. You may find a documentation and examples on the site of the utility: *https://www.stunnel.org*
+System uses utilty called ==stunnel== which is available for the majority of platforms. You may find documentation and some examples here: *https://www.stunnel.org*
 
 !!! MongoDB appliance example configuration
 
-Pharocloud hosting appliances are stunnel-ready so it is very easy to configure Ephemeric Cloud instance to work with Pharocloud database appliance. For instance, let's see how to connect ephemeric instance to mongo db appliance.
+Pharocloud hosting appliances are stunnel-ready so it is quite easy to configure Ephemeric Cloud instance to work with Pharocloud database appliance. For instance, let's take a look on how to connect ephemeric instance to mongo db appliance.
 
-Pharocloud database appliances are not accessible by an unsecure port by default. User has to establish a secure tunnel with pre-shared keys authentication in order to get access to the data.
+Pharocloud database appliances are not accessible by unsecure port by default. The user has to establish a secure tunnel with pre-shared authentication keys in order to get access to the data.
 
 To connect your local machine to a database appliance follow the below steps:
 
@@ -41,7 +41,7 @@ Contents of ==psk.txt==
 eph1:BMT33fgJGQzwH88KERatxXmA
 ]]]
 
-Note, that this configuration opens a connection to a remote MongoDB and make it accessible via local 27017 unencrypted port.
+Note, that this configuration opens a connection to a remote MongoDB and makes it accessible via local 27017 unencrypted port.
 
 To test connection put ==stunnel.conf== and ==psk.txt== to the same directory in Image Archive File for the system to pick up them and configure the connections.
 
@@ -57,4 +57,4 @@ If you want just to try it out then proceed with the following steps:
 # Replace ==stunel.conf== content with ''PUBLIC'' configuration of your appliance.
 # Create a new zip archive with Pharo Image and modified ==stunnel.conf== and ==psk.txt== and publish it in Ephemeric cloud - the application should get connected to your database.
 
-Please note that if you may run multiple instances of the application and check if they work with the same database.
+Please note that if you run multiple instances of the application, they work with the same database.
