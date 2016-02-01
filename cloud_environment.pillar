@@ -2,13 +2,13 @@
 
 ! Configurable Cloud Environment
 
-It is possible to connect Ephemeric cloud instance to external services like databases. If the cloud runtime finds a special file named ==stunnel.conf== in a published Image Archive File then it creates a secure tunnel to specified services.
+There is an option to connect Ephemeric cloud instance to external services like databases. If the cloud runtime finds a special file named ==stunnel.conf== in a published Image Archive File then it creates a secure tunnel to the specified services.
 
 Configuration file ==stunnel.conf== is a plain text file which consists of description of tunnels. Each description usually contains connection information to remote service and authentification method (like "pre-shared keys" or "certificates").
 
-Configuration file may contain several destination. The system will open all connections for you then.
+Configuration file may contain several destinations. The system will open all connections in this case.
 
-The tunnels are secured by encription and hence you may connect to your services across public network. However, all encription job is done by the system so from ephemeric instance point of view it would seem like working with open, un-enctypted ports.
+The tunnels are secured by encription and hence you may connect to your services across public network. However the entire encription job is done by the system so from ephemeric instance point of view it would seem like operating with open un-enctypted ports.
 
 System uses utilty called ==stunnel== which is available for the majority of platforms. You may find documentation and some examples here: *https://www.stunnel.org*
 
@@ -18,7 +18,7 @@ Pharocloud hosting appliances are stunnel-ready so it is quite easy to configure
 
 Pharocloud database appliances are not accessible by unsecure port by default. The user has to establish a secure tunnel with pre-shared authentication keys in order to get access to the data.
 
-To connect your local machine to a database appliance follow the below steps:
+To connect your local machine to a database appliance follow the steps below:
 
 # Start a MongoDB appliance at Pharocloud
 # Create a ==psk.txt== file which contains a line with user id and password.
@@ -41,15 +41,15 @@ Contents of ==psk.txt==
 eph1:BMT33fgJGQzwH88KERatxXmA
 ]]]
 
-Note, that this configuration opens a connection to a remote MongoDB and makes it accessible via local 27017 unencrypted port.
+Please note that this configuration opens a connection to remote MongoDB and makes it accessible via local 27017 unencrypted port.
 
 To test connection put ==stunnel.conf== and ==psk.txt== to the same directory in Image Archive File for the system to pick up them and configure the connections.
 
 !! Quick-start package
 
-If you want just to try it out then proceed with the following steps:
+If you want just to try it out then proceed with the steps below:
 
-# Download Pharo Image with a sample Seaside&Voyage Todo Application:
+# Download Pharo Image with sample Seaside&Voyage Todo Application:
 #- *Todo Application bundle>http://imagetransport.pharocloud.com/imagestore/todo4.image.zip*
 # The archive contains ==stunnel.conf== and ==psk.txt== which you need to modify by the following steps
 # Start a Mongo Small appliance at Pharocloud (it is free for a week)
@@ -57,4 +57,4 @@ If you want just to try it out then proceed with the following steps:
 # Replace ==stunel.conf== content with ''PUBLIC'' configuration of your appliance.
 # Create a new zip archive with Pharo Image and modified ==stunnel.conf== and ==psk.txt== and publish it in Ephemeric cloud - the application should get connected to your database.
 
-Please note that if you run multiple instances of the application, they work with the same database.
+Please note that if you run multiple instances of the application, they all work with the same database.

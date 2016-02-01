@@ -2,18 +2,18 @@
 
 ! [Use Case] Pharo Smalltalk development process with Ephemeric cloud
 
-*Pharocloud Ephemeric Cloud>https://www.pharocloud.com/kb/tutorial/ephemerics-introduction* is a powerful tool created for building stable development process with Pharo Smalltalk. The following article will introduce a deployment plan that allows to apply best practices of software development cycle to Pharo web application development.
+*Pharocloud Ephemeric Cloud>https://www.pharocloud.com/kb/tutorial/ephemerics-introduction* is a powerful tool created for building stable development process with Pharo Smalltalk. This article will introduce the deployment plan that allows to apply best practices of software development cycle to Pharo web application development.
 
-The plan describes 3 environments for a development process:
-# Development environment: tools that may be used by a developer to write and test a project.
+The plan describes 3 environments for development process:
+# Development environment: tools that may be used by developer to write and test project.
 # Testing environment: tools for starting test instances in cloud environment and running QA tests.
-# Beta/Production environment: tools for creation a platform for beta-test and  publishing a stable version of a project.
+# Beta/Production environment: tools for creation a platform for beta-test and publishing stable project version.
 
-The main idea of the plan is running Smalltalk code in Ephemeric instances and running necessary resources like databases as Pharocloud appliances. Standard Ephemeric Cloud subscription plan allows you to run up to 10 instances which should be enough for any development purposes in scope of the plan. Pharocloud appliances provides you with most common applications for web development like MongoDB, PostgreSQL, Static resources. 
+The main idea of the plan is running Smalltalk code in Ephemeric instances and running necessary resources like databases as Pharocloud appliances. Standard Ephemeric Cloud subscription plan allows you to run up to 10 instances which should be enough for any development purposes in scope of the plan. Pharocloud appliances provide you with most known applications for web development like MongoDB, PostgreSQL, Static resources. 
 
-If you need something specific then contact Pharocloud support for details on custom appliances.
+If you need something specific which is not on the list, then contact Pharocloud support for details at support@pharocloud.com.
 
-In this article we will use Gate and PostgreSQL appliances and three Ephemeric cloud instances. The conceptual diagram of the deployment plan is as follows:
+In this article we use Gate and PostgreSQL appliances and three Ephemeric cloud instances. The conceptual diagram of the deployment plan is as follows:
 
 +file://figures/ephmeric_cloud_dev.png+
 
@@ -22,41 +22,34 @@ In this article we will use Gate and PostgreSQL appliances and three Ephemeric c
 
 Pharocloud provides the following tools for Pharo smalltalk developer:
 
-# Developer can create a ""secure channel to a database server"" from his development machine through a public network. The configuration is extremely simple. It allows to see an external services as a local one. For instance, a remote PostgreSQL server can be seen as local non-encrypted service running on a standard PostgreSQL port (5432). To configure such a tunnel follow the instruction on Pharocloud database appliance ==stunnel== tab.
-# Developer can run test instances in Ephemeric cloud using REST API provided by a service. Ephemeric cloud instances can be managed in many ways:
+# Developer can create a ""secure channel to a database server"" from his development machine through public network. The configuration is extremely simple. It allows to see all external services as local. For instance, remote PostgreSQL server can be seen as local non-encrypted service running on standard PostgreSQL port (5432). To configure such tunnel follow the instruction on Pharocloud database appliance ==stunnel== tab.
+# Developer can run test instances in Ephemeric cloud using REST API provided by the service. Ephemeric cloud instances can be managed many ways:
 #- *using BASH script>https://www.pharocloud.com/kb/tutorial/ephemeric_cloud_bash_script*
 #- *using Pharo Playground script>https://www.pharocloud.com/kb/tutorial/ephemeric_publish_from_workspace*
 
-
 Please note that the developer can access published Images directly by internal Ephemeric cloud hostnames (ex.: *http://eph-eaa7a571.swarm.pharocloud.com/*") without going through the Gate appliance.
 
-
-With those tools a development process can be really flexible:
+With those tools development process can be really flexible:
 # Developer can switch from one database to another to check his code; 
-# Can start new instances of a project in the cloud to run tests.
+# Developer can start new project instances in the cloud to run tests.
 
 
 !! 2 Testing environment
 
-Ephemeric cloud integrates well with continuous integration systems. Run of the Image can be scripted with any client which supports HTTP requests (like ==bash== or ==Pharo workspace==) thus we can easily imagine a script which automatically downloads and builds a project from a repository, publishes it in Ephemeric cloud, runs unit tests on the instance and analyses the results. To have an example bash script you may refer to the following article: *https://www.pharocloud.com/kb/tutorial/ephemeric_cloud_bash_script*
-
+Ephemeric cloud integrates well with continuous integration systems. Run of the Image can be scripted with any client which supports HTTP requests (like ==bash== or ==Pharo workspace==) thus we can easily imagine a script which automatically downloads and builds project from repository, publishes it in Ephemeric cloud, runs unit tests on the instance and analyses the results. To have an example bash script you may refer to the following article: *https://www.pharocloud.com/kb/tutorial/ephemeric_cloud_bash_script*
 
 !! 3 Beta/Production enviroment
 
-When you start an instance in Ephemeric cloud it generates a random hostname which identifies the application. However despite on this restriction Ephemeric cloud can be used both for beta-test and production environments. The trick is to use a Gate appliance which can be configured to route specific user requests to a specific ephemeric instance.
+When you start an instance in Ephemeric cloud it generates a random hostname which identifies the application. However despite on this restriction Ephemeric cloud can be used both for beta-test and production environments. The trick is to use Gate appliance which can be configured to route specific user requests to specific ephemeric instance.
 
 On the diagram of the plan you may see that Gate appliance is configured to route ==www.example.org== to the first ephemeric instance, and ==beta.example.org== to another. With this setup user can easily switch the production URL to a newer version just by reconfiguring the Gate to point to the new ephemeric instance.
 
-The main idea of the plan is to publish an application as "beta" version and run it on a special domain (==beta.example.org==). When the stability of the new code is assured, the ephemeric can be re-mapped to the main domain with just few clicks.
+The main idea of the plan is to publish an application as "beta" version and run it on a special domain (==beta.example.org==). When stability of the new code is assured, the ephemeric can be re-mapped to the main domain with just few clicks.
 
-This approach provides a flexible tool to manage development lifecycle of a web application.
-
+This approach provides a flexible tool to manage development lifecycle of web application.
 
 !! Conclusion
 
-Pharocloud two products: appliance hosting and Ephemeric cloud provide the users with a flexible platform that helps developers to create a steady development process for web application. Here we described only one pattern you can implement with Pharocloud infrastructure, however there are quite a few simple ways to change the process to fit your special needs.
+Pharocloud two products: appliance hosting and Ephemeric cloud provide the users with a flexible platform that helps developers to create steady development process for web application. Here we described only one pattern you can implement with Pharocloud infrastructure, but there are quite a few simple ways to change the process to fit your special needs.
 
-Try this configuration out and share your thoughts on it with me by commenting below or contacting me directly at support@pharocloud.com.
-
-Cheers,
-Mike
+Try this configuration out and share your thoughts on it with us by commenting below or contacting us directly at support@pharocloud.com.

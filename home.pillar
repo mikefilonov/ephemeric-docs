@@ -5,9 +5,9 @@
 }
 ! Ephemeric Cloud Documentation
 
-Ephemeric cloud is a platform for publishing web applications developed with Pharo. Platform provides a developer with REST API and Pharo Library to manage instances and publish new Pharo Images. 
+Ephemeric cloud is a platform for publishing web applications developed with Pharo. The platform provides a developer with REST API and Pharo Library to manage instances and publish new Pharo Images. 
 
-Ephemeric cloud is readonly "Just In Time" cloud implementation which means that application VMs are running only when they are used allowing for managing big volume of published Images at a low datacenter costs.
+Ephemeric cloud is readonly "Just In Time" cloud implementation which means that application VMs run only when they are used allowing to manage big number of published Images at low datacenter costs.
 
 !! Tutorial
 

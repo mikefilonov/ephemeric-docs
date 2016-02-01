@@ -1,32 +1,29 @@
 @usecase_do_mongo
 
-! [Use Case] How to connect an ephemeric application to a Digital Ocean droplet
+! [Use Case] How to connect ephemeric application to Digital Ocean droplet
 
 !! 1 Ephemeric cloud managed runtime
 
-*Ephemeric cloud managed runtime>https://www.pharocloud.com/kb/tutorial/ephemeric_cloud_managed_runtime* allows you to map remote services like MongoDB to ephemeric instances which looks like the services run locally with the applications on the same host. It allows a developer not to put any configuration to the applciation code but to use default local settings (as services will be mapped to the application at runtime).
+*Ephemeric cloud managed runtime>https://www.pharocloud.com/kb/tutorial/ephemeric_cloud_managed_runtime* allows you to map remote services like MongoDB to ephemeric instances which looks like the services run locally with the applications on the same host. It allows developer not to put any configuration to the application code but to use default local settings (as services will be mapped to the application at runtime).
 
-The Ephemeric Cloud runtime envoronment uses ==stunnel== to create a secure tunnel between an application and the resources thus making the communication secure. It becomes possible to map any remote services using the managed runtime enviroment. 
+The Ephemeric Cloud runtime environment uses ==stunnel== to create secure tunnel between the application and the resources thus making the communication secure. It becomes possible to map any remote services using the managed runtime environment. 
 
-In this article I'll show you how to connect your Ephemeric Pharo Image to MongoDB service hosted as a droplet at Digital Ocean.
+This article shows how to connect your Ephemeric Pharo Image to MongoDB service hosted as droplet at Digital Ocean.
 
 +file:///figures/usecase_do_mongo_1.png+
 
-
-Please consider that the approach described here is universal and you can connect your applications to any service provider or your own dedicated servers. Digital Ocean is used in this article just as an example.
+Please consider that the approach described here is versatile and you can connect your applications to any service provider or your own dedicated servers. Digital Ocean is used in this article just as an example.
 
 !! 2 Digital ocean droplet configuration
 
-First, let's run a Digital Ocean droplet with MongoDB and configure a secure tunnel server side on it.
+First, let's run a Digital Ocean droplet with MongoDB and configure secure tunnel server side on it.
 
-1. Run a MongoDB droplet. I used the version available as one-click install option.
-
+1. Run a MongoDB droplet. I used the version available as one-click installation option.
 
 2. Follow the instruction to configure stunnel on the droplet:
 - *https://www.digitalocean.com/community/tutorials/how-to-set-up-an-ssl-tunnel-using-stunnel-on-ubuntu*
 
-
-2.1. Use the following ==/etc/stunnel/stunnel.conf== file on the droplet to have a tunnel to a MongoDB server:
+2.1. Use the following ==/etc/stunnel/stunnel.conf== file on the droplet to have a tunnel to MongoDB server:
 
 [[[
 client = no
@@ -37,11 +34,9 @@ cert = /etc/stunnel/stunnel.pem
 ]]]
 
 
-3. Copy a certificate you created (==stunnel.pem==) to your local computer.
-
+3. Copy the certificate you created (==stunnel.pem==) to your local computer.
 
 !! 3 Configuration of an ephemeric application
-
 
 1. Create a client side ==stunnel.conf==
 
@@ -54,7 +49,7 @@ connect = [Droplet’s Public IP]:27018
 ]]]
 
 
-2. Create a zip-archive with a Pharo Image, ==stunnel.conf== and the certificate (==stunnel.pem== which was copied from the droplet).
+2. Create zip-archive with a Pharo Image, ==stunnel.conf== and the certificate (==stunnel.pem== which was copied from the droplet).
 
 For instance, archive file lists can be as follows:
 
@@ -66,12 +61,10 @@ stunnel.pem
 
 
 
-3. Publish the archive to an ephemeric cloud.
+3. Publish the archive to ephemeric cloud.
 
-The following ephemeric works with a MongoDB running on Digital ocean:
+The following ephemeric works with MongoDB running on Digital ocean:
 - *http://eph-f2e2bcac.swarm.pharocloud.com/todo*
-
-
 
 
 ! Related topics

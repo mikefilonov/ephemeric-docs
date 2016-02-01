@@ -5,12 +5,12 @@
 Ephemeric cloud REST API is a collection of HTTP requests designed to manage your cloud. Requests work with ==JSON== format to respond your calls.
 
 The REST API objects are:
-- a user,
-- a collection of ephemerics owned by a user,
-- a property of ephemeric.
+- user,
+- collection of ephemerics owned by a user,
+- property of ephemeric.
 
-Objects are grouped in a tree like structure: ==<user>/<ephemeric>/<property>==.
-User object is identified by ==userID== which is given to your account after a registration process. Ephemeric instance is identified by a hostname (eg.: ==eph-312de9eb.swarm.pharocloud.com==).
+Objects are grouped in tree structure: ==<user>/<ephemeric>/<property>==.
+User object is identified by ==userID== which is given to your account after registration process. Ephemeric instance is identified by hostname (eg.: ==eph-312de9eb.swarm.pharocloud.com==).
 
 
 !! API end-point
@@ -21,7 +21,7 @@ https://www.pharocloud.com/api/ephemerics/user/<userID>
 ]]]
 
 !! Authentification
-Authentification can be done by basic HTTP authentification header or by adding ==auth== query parameter to an request URL.
+Authentification can be done by basic HTTP authentification header or by adding ==auth== query parameter to URL request.
 Ex:
 [[[
 https://www.pharocloud.com/api/ephemerics/user/<userID>?auth=<authToken>
@@ -30,7 +30,7 @@ https://www.pharocloud.com/api/ephemerics/user/<userID>?auth=<authToken>
 
 !! Methods
 
-The list of REST API calls is as follows:
+The list of REST API calls are as follows:
 - ==POST /api/ephemerics/user/<userID>== creates a new Ephemeric application using Image Archive File which is attached to the query (file field property "imageZip").
 - ==GET /api/ephemerics/user/<userID>== gets information about all Ephemerics owned by a userID.
 - ==GET /api/ephemerics/user/<userID>/<ephemericHost>== gets information about an Ephemeric application which associated with "ephemericHost".

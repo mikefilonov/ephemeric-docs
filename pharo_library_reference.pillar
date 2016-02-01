@@ -81,7 +81,7 @@ Publish Zip Image Archive file in Ephemeric Cloud. Answer created EphemericInsta
 !!!! publishSelfAs: imageName with: achiveBlock
 {{{html:<blockquote>}}}
 
-Backup current Image and publish it in Ephemeric Cloud. ==archiveBlock== is one argument block which accepts a archive been created to allow adding more files except for ==.image== and ==.changes==.
+Backup current Image and publish it in Ephemeric Cloud. ==archiveBlock== is one argument block which accepts the archive been created to allow adding more files except ==.image== and ==.changes==.
 
 Answers ==false== in original Image, ==true== in Image copy which is to be published in the Cloud.
 
