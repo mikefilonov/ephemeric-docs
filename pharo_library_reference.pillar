@@ -1,14 +1,38 @@
 @pharo_library_reference
 
+{{{html:
+<style>
+blockquote {
+border: 0;
+font-size: 10pt;
+padding-top: 0px;
+margin-top: 0px;
+}
+h5 {
+background-color: #EEEEEE;
+padding: 5px;
+}
+</style>
+}}}
 ! Pharo Library Reference
 
-!! Installation
+!! Quick-start
+
+!!! Install API library
 
 [[[
-Metacello new 
-    baseline: #EphemericCloudAPI; 
-    repository: 'github://mikefilonov/PharoEphemericCloudApi';
-    load.
+Gofer it
+    smalltalkhubUser: 'mikefilonov' project: 'EphemericCloudAPI';
+    configuration;
+    loadDevelopment.
+]]]
+
+!!! Test connection
+
+[[[
+|client|
+client := EphemericCloudClient userID: 'myid' authToken: 'mypass'.
+client test.
 ]]]
 
 !!! Repository
@@ -25,9 +49,12 @@ Metacello new
 !!Classes
 @EphemericCloudClient
 !!! EphemericCloudClient
+Represents an API client which allows you to work with your Ephemeric Cloud account. Client can fetch information about existing instances, create new instance and delete instances from the cloud.
+
+!!!! Methods
 
 @userID:authToken:
-!!!! userID:authToken: ''(class method)''
+!!!!! userID:authToken: ''(class method)''
 {{{html:<blockquote>}}}
 Create an instance of EphemericCloudClient, authenticate with ==userID== and ==authToken==
 
@@ -40,14 +67,14 @@ client := EphemericCloudClient
 
 
 @test
-!!!! test
+!!!!! test
 {{{html:<blockquote>}}}
 Check if client is connected and authenticated.
 {{{html:</blockquote>}}}
 
 
 @all
-!!!! all
+!!!!! all
 {{{html:<blockquote>}}}
 Answer an array of EphemericInstances for current client.
 
@@ -57,7 +84,7 @@ client all.
 ]]]
 {{{html:</blockquote>}}}
 @/
-!!!! / hostname
+!!!!! / hostname
 {{{html:<blockquote>}}}
 Answer an EphemericInstance with a hostname or alias equals to ==aString==
 
@@ -69,7 +96,7 @@ client / 'docs.swarm.pharocloud.com'.
 {{{html:</blockquote>}}}
 
 @publishZip:named:
-!!!! publishZip: aFileReference named: imageNameString
+!!!!! publishZip: aFileReference named: imageNameString
 {{{html:<blockquote>}}}
 Publish Zip Image Archive file in Ephemeric Cloud. Answer created EphemericInstance object.
 {{{html:</blockquote>}}}
@@ -78,7 +105,7 @@ Publish Zip Image Archive file in Ephemeric Cloud. Answer created EphemericInsta
 
 
 @publishSelfAs:with:
-!!!! publishSelfAs: imageName with: achiveBlock
+!!!!! publishSelfAs: imageName with: achiveBlock
 {{{html:<blockquote>}}}
 
 Backup current Image and publish it in Ephemeric Cloud. ==archiveBlock== is one argument block which accepts the archive been created to allow adding more files except ==.image== and ==.changes==.
@@ -102,67 +129,72 @@ isNew
 @EphemericInstance
 !!! EphemericInstance
 
+Provides an object wrapper around an ephemeric instance. Allows you to manipulate information of an individual host in the cloud.
+
+
+!!!! Methods
+
 
 @hostname
-!!!!hostname
+!!!!!hostname
 {{{html:<blockquote>}}}
 Answer hostname (string) of an ephemeric instance.
 {{{html:</blockquote>}}}
 
 @alias
-!!!!alias
+!!!!!alias
 {{{html:<blockquote>}}}
 Answer alias hostname (string) of an ephemeric instance.
 {{{html:</blockquote>}}}
 
 
 @alias:
-!!!!alias:
+!!!!!alias:
 {{{html:<blockquote>}}}
 Set or change alias hostname for the instance. ==nil== to remove alias from the instance.
 {{{html:</blockquote>}}}
 
 @reload
-!!!!reload
+!!!!!reload
 {{{html:<blockquote>}}}
 Reread information on the instance from the API server.
 {{{html:</blockquote>}}}
 
 @delete
-!!!!delete
+!!!!!delete
 {{{html:<blockquote>}}}
 Delete ephemeric instance from the cloud.
 {{{html:</blockquote>}}}
 
 
 @imageName
-!!!!imageName
+!!!!!imageName
 {{{html:<blockquote>}}}
 Answer ==imageName== of the instance.
 {{{html:</blockquote>}}}
 
 
 @imageName:
-!!!!imageName:
+!!!!!imageName:
 {{{html:<blockquote>}}}
 Change ==imageName== property of the ephemeric instance.
 {{{html:</blockquote>}}}
 
 @isRunning
-!!!!isRunning
+!!!!!isRunning
 {{{html:<blockquote>}}}
 Answer whether the instance is currently active.
 {{{html:</blockquote>}}}
 
 @isRunning:
-!!!!isRunning:
+!!!!!isRunning:
 {{{html:<blockquote>}}}
 Used to force-stop or force-activate the instance. To stop the instance set the value to ==false==.
 {{{html:</blockquote>}}}
 
 
 @accessTime
-!!!!accessTime
+!!!!!accessTime
 {{{html:<blockquote>}}}
 Answer DateAndTime  string of last access time of the instance.
 {{{html:</blockquote>}}}
@@ -170,7 +202,7 @@ Answer DateAndTime  string of last access time of the instance.
 
 
 @createdTime
-!!!!createdTime
+!!!!!createdTime
 {{{html:<blockquote>}}}
 Answer DateAndTime string of instance creation.
 {{{html:</blockquote>}}}

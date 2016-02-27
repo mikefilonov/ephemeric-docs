@@ -4,7 +4,7 @@
 
 There are plenty ways to deploy Smalltalk application online: Amazon cloud, Digital Ocean virtual machines, dedicated servers and more (some guys even use Pharocloud appliances:)). The deployment process for Smalltalk applications with such approaches is basically equal to the deployment process for any other applications: in most cases you must configure your Linux virtual machine to launch executable with specified settings.
 
-We believe that Smalltalk deserves MORE
+We believe that Smalltalk deserves MORE.
 
 After all the standard approach of applications deployment absolutely ignores Smalltalk features and makes this process far more complicated than it should be.
 
@@ -12,7 +12,7 @@ Just think: Smalltalk image contains not only the application code but the whole
 
 Ok, we gave the idea of perfect hosting for Smalltalk applications a try and here is what we got – Ephemeric cloud.
 
-The CONCEPT
+!!! Concept
 
 Ephemeric cloud primary concept is Smalltalk image as the main system unit. Developer works not with virtual machines but with Smalltalk images deployed in the cloud. Hence to launch a new application only the image is required to be uploaded to the cloud – let the system cares about all the other stuff.
 
@@ -22,7 +22,7 @@ Moreover there is another system feature – it works through application progra
 
 As for technical point of view Ephemeric cloud is developed according to so-known “Just in time cloud” concept. It means that the applications running in the cloud are stopped after some non-active time and respectively require no resources. On the next access attempt the application launches again, thus it looks like the application works permanently. Sounds great, right? Though such a concept has some restrictions on the applications to be run in the cloud.
 
-The RESTRICTIONS
+!!! Restrictions
 
 First, the applications must be quit-tolerant which means the application should handle well sudden shutdown after some downtime and run appropriately after restart.
 
@@ -31,13 +31,13 @@ Second, to ensure images stable start and restart in the system, we made publish
 Finally, the cloud is created for web-applications hosting and micro-services first, thus “activity” in our understanding means incoming http-requests. This being said, the cloud expects enabled web-server inside the image on 8080 port.
 Generally such restrictions should not be a problem for majority of web-applications.
 
-What about the PAYMENT
+!!! Pricing for Ephemeric Cloud
 
 As for the payment question, we are happy to introduce you another feature. While operating with Ephemeric cloud, our users do not pay for every single image published as it is in case of virtual machines. Ephemeric cloud works on flat monthly fee base. It is possible to choose between different cloud access levels with respective payment. Access levels differ by the number of resources available, i.e. maximum number of simultaneously active Images. Within the chosen access level, the user can start, stop, and change the images published without any restrictions.
 
 And here comes our icing on the cake! 
 
-Currently our cloud works in beta-version mode, thus we are willing to give the access to everyone who cares absolutely for free. Thereby, if you also support the idea of perfect Smalltalk hosting, you’re very welcome!
+Currently our cloud works in beta-version mode, thus we are willing to give the access to Pharo association members for free. Thereby, if you also support the idea of perfect Smalltalk hosting, you’re very welcome!
 
 As always, please contact me at support@pharocloud.com in case of any questions.
 

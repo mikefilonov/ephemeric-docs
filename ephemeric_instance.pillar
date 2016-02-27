@@ -1,5 +1,19 @@
 @ephemeric_instance
 
+{{{html:
+<style>
+blockquote {
+border: 0;
+font-size: 10pt;
+padding: 0;
+}
+h5 {
+background-color: #EEEEEE;
+padding: 5px;
+}
+</style>
+}}}
+
 ! Ephemeric Instances
 
 Ephemeric cloud is designed to efficiently host lots of applications. There are some restrictions applied to the hosted Images though.
@@ -47,28 +61,28 @@ Ephemeric cloud provides an automation of environment configuration by using sec
 }
 ]]]
 
-!!! Properties
-!!!! hostname
+!!! Instance Properties
+!!!!! hostname
 {{{html:<blockquote>}}}
 Random-generated hostname is automatically assigned to an instance upon publish. It is used as unique identifier of an instance in the cloud. Read-only property.
 
 Ex.: == "eph-865894e7.swarm.pharocloud.com"==
 {{{html:</blockquote>}}}
 
-!!!! createdTime
+!!!!! createdTime
 {{{html:<blockquote>}}}
 Date and time of initial instance creation. Read-only property.
 
 Ex.: =="2016-01-12T15:19:20.204+00:00"==
 {{{html:</blockquote>}}}
 
-!!!! isRunning
+!!!!! isRunning
 {{{html:<blockquote>}}}
 Boolean, ==true== if instance is actively running right now. Writable option. To activate instance you can change the value to ==true==.
 {{{html:</blockquote>}}}
 
 
-!!!! alias
+!!!!! alias
 {{{html:<blockquote>}}}
 Additional hostname that can be assigned to instance by user. If set to the value assigned to another instance owned by the user then previous instance's alias is set to ==null== value. Writable string property.
 
@@ -77,12 +91,12 @@ Additional hostname that can be assigned to instance by user. If set to the valu
 @@Note User may use any hostname you want if it is pointing to ephemeric gate domain. You also may use any ==*.swarm.pharocloud.com== domain for not to configure anything, just make sure alias is not claimed yet.
 {{{html:</blockquote>}}}
 
-!!!! accessTime
+!!!!! accessTime
 {{{html:<blockquote>}}}
 Last time instance was activated. Read-only date string property.
 {{{html:</blockquote>}}}
 
-!!!! imageName
+!!!!! imageName
 {{{html:<blockquote>}}}
 A descriptive name of the instance set by a user. Writable string property.
 {{{html:</blockquote>}}}

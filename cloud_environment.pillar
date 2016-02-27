@@ -14,9 +14,9 @@ System uses utilty called ==stunnel== which is available for the majority of pla
 
 !!! MongoDB appliance example configuration
 
-Pharocloud hosting appliances are stunnel-ready so it is quite easy to configure Ephemeric Cloud instance to work with Pharocloud database appliance. For instance, let's take a look on how to connect ephemeric instance to mongo db appliance.
+Pharocloud hosting appliances are stunnel-ready so it is quite easy to configure Ephemeric Cloud instance to work with Pharocloud database appliance. For instance, let's take a look on how to connect ephemeric instance to a MongoDB appliance.
 
-Pharocloud database appliances are not accessible by unsecure port by default. The user has to establish a secure tunnel with pre-shared authentication keys in order to get access to the data.
+Pharocloud database appliances are not accessible via unsecure port by default. The user has to establish a secure tunnel with pre-shared authentication keys in order to get access to the database.
 
 To connect your local machine to a database appliance follow the steps below:
 
@@ -41,9 +41,9 @@ Contents of ==psk.txt==
 eph1:BMT33fgJGQzwH88KERatxXmA
 ]]]
 
-Please note that this configuration opens a connection to remote MongoDB and makes it accessible via local 27017 unencrypted port.
+Please note that this configuration opens a connection to remote MongoDB and makes it accessible locally on 27017 unencrypted port. This means that Pharo application should be configured with default settings to be able to connect to the database.
 
-To test connection put ==stunnel.conf== and ==psk.txt== to the same directory in Image Archive File for the system to pick up them and configure the connections.
+To publish an ephemeric instance with the secure tunnel configuration put ==stunnel.conf== and ==psk.txt== files to the same directory as Pharo Image before creating an Image Archive File. When ephemeric is published it should have a valid connection to the database.
 
 !! Quick-start package
 
